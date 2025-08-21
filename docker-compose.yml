@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  sns-digest:
+    image: sns-digest:latest
+    ports:
+      - "8000:8000"
+    environment:
+      DIGEST_INTERVAL: "600"
+      LOCAL_FILE: "/data/sns_events.log"
+      SMTP_SERVER: "${SMTP_SERVER}"
+      SMTP_PORT: "${SMTP_PORT}"
+      SMTP_TLS_MODE: "${SMTP_TLS_MODE}"
+      EMAIL_USER: "${EMAIL_USER}"
+      EMAIL_PASS: "${EMAIL_PASS}"
+      EMAIL_TO:   "${EMAIL_TO}"
+      S3_BUCKET:  "${S3_BUCKET}"
+      AWS_REGION: "${AWS_REGION:-}"
+      AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID:-}"
+      AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY:-}"
+    volumes:
+      - sns-data:/data
+    restart: unless-stopped
+
+volumes:
+  sns-data:
