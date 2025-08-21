@@ -19,9 +19,14 @@ stores them locally in S3, and optionally forwards a summary via email.
 
 2. Copy .env.example to .env and update values.
 
-3. Build & run:
+3. Build:
    ```bash
-    docker-compose up --build
+    cd docker
+    docker build -t sns-digest:latest .
+   
+4. Run:
+   ```bash
+   docker-compose up -d
    
 5. Expose the service endpoint to SNS:
    ```bash
